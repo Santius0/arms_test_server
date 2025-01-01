@@ -1,16 +1,28 @@
 #!/bin/bash
 
-# Install required dependencies
+# Step 1: Install required dependencies
 if ! command -v python3 &> /dev/null
 then
     echo "Python3 is not installed. Installing Python3..."
-    sudo apt update && sudo apt install -y python3 python3-pip
+    sudo apt update && sudo apt install -y python3
     if [ $? -ne 0 ]; then
         echo "Failed to install Python3. Exiting."
         exit 1
     fi
 else
     echo "Python3 is already installed."
+fi
+
+if ! command -v pip3 &> /dev/null
+then
+    echo "Pip3 is not installed. Installing Pip3..."
+    sudo apt install -y python3-pip
+    if [ $? -ne 0 ]; then
+        echo "Failed to install Pip3. Exiting."
+        exit 1
+    fi
+else
+    echo "Pip3 is already installed."
 fi
 
 if ! python3 -m pip show streamlit &> /dev/null
@@ -55,10 +67,10 @@ echo "Creating the unsloth model with ollama..."
 ollama create arms_unsloth_ollama_model -f "$MODEL_DIR/unsloth.Q8_0.gguf"
 if [ $? -ne 0 ]; then
     echo "Failed to create the unsloth model. Exiting."
-    exit 1
+        exit 1
 fi
 
-# Run the Streamlit Python script
+# Step 6: Run the Streamlit Python script
 echo "Running the Streamlit Python script..."
 streamlit run test_client.py --server.port 8501
 if [ $? -ne 0 ]; then
