@@ -52,7 +52,7 @@ fi
 
 # Create the unsloth model using ollama
 echo "Creating the unsloth model with ollama..."
-ollama create unsloth_model -f "$MODEL_DIR/unsloth.Q8_0.gguf"
+ollama create arms_unsloth_ollama_model -f "$MODEL_DIR/unsloth.Q8_0.gguf"
 if [ $? -ne 0 ]; then
     echo "Failed to create the unsloth model. Exiting."
     exit 1
