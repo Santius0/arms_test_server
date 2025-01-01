@@ -67,7 +67,7 @@ def query_backend(model_name, instruction, input_text):
         #     else model_answer_full
         # )
         # return model_answer
-        return "dummy"
+        return response.text
 
     except requests.exceptions.RequestException as e:
         # Log the error to the console
