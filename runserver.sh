@@ -53,7 +53,7 @@ else
 fi
 
 # Download the GGUF model from Hugging Face
-HUGGING_FACE_MODEL_URL="https://huggingface.co/santius0/arms_lora_model/blob/main/unsloth.Q8_0.gguf"
+HUGGING_FACE_MODEL_URL="https://huggingface.co/santius0/arms_lora_model/resolve/main/unsloth.Q8_0.gguf"
 MODEL_DIR="arms_lora_model_gguf"
 
 mkdir -p "$MODEL_DIR"
