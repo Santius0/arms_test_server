@@ -1,1 +1,1 @@
-FROM ./arms_lora_model_gguf/unsloth.Q8_0.gguf
+FROM /root/arms_test_server/arms_lora_model_gguf/unsloth.Q8_0.gguf
