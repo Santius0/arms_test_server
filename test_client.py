@@ -13,7 +13,7 @@ ENDPOINT_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "arms_unsloth_ollama_model"
 
 # Prompt Template
-alpaca_prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request. Never return a response of None.
+alpaca_prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 
 ### Instruction:
 {}
@@ -39,8 +39,7 @@ def query_backend(model_name, instruction, input_text):
         model_answer_full = response.json().get("response", "")
         response_start = "### Response:\n"
         model_answer = model_answer_full.split(response_start, 1)[-1].strip() if response_start in model_answer_full else model_answer_full
-        return response.text
-        # return model_answer
+        return model_answer
     except requests.exceptions.RequestException as e:
         st.error(f"Error communicating with the backend: {e}")
         return None
