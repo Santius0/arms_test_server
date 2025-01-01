@@ -9,7 +9,7 @@ st.sidebar.title("Settings")
 user_input = st.text_input("Enter your query:", "", placeholder="Type your question here")
 
 # API Endpoint Configuration
-OLLAMA_SERVER_URL = "http://localhost:8000"
+OLLAMA_SERVER_URL = "http://localhost:11434"
 MODEL_NAME = "arms_unsloth_ollama_model"
 
 # Function to send request to Ollama backend

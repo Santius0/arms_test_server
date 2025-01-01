@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Parse command-line arguments
+DOWNLOAD_MODEL=false
+for arg in "$@"
+do
+    case $arg in
+        -d|--download)
+        DOWNLOAD_MODEL=true
+        shift
+        ;;
+    esac
+done
+
 # Install required dependencies
 if ! command -v python3 &> /dev/null
 then
@@ -52,21 +64,27 @@ else
     echo "Ollama is already installed."
 fi
 
-# Download the GGUF model from Hugging Face
+# Download the GGUF model from Hugging Face if it doesn't exist or if download flag is set
 HUGGING_FACE_MODEL_URL="https://huggingface.co/santius0/arms_lora_model/resolve/main/unsloth.Q8_0.gguf"
 MODEL_DIR="arms_lora_model_gguf"
+MODEL_PATH="$MODEL_DIR/unsloth.Q8_0.gguf"
 
-mkdir -p "$MODEL_DIR"
-echo "Downloading GGUF model from Hugging Face..."
-wget -O "$MODEL_DIR/unsloth.Q8_0.gguf" "$HUGGING_FACE_MODEL_URL"
-if [ $? -ne 0 ]; then
-    echo "Failed to download the GGUF model. Exiting."
-    exit 1
+if [ ! -f "$MODEL_PATH" ] || [ "$DOWNLOAD_MODEL" = true ]
+then
+    mkdir -p "$MODEL_DIR"
+    echo "Downloading GGUF model from Hugging Face..."
+    wget -O "$MODEL_PATH" "$HUGGING_FACE_MODEL_URL"
+    if [ $? -ne 0 ]; then
+        echo "Failed to download the GGUF model. Exiting."
+        exit 1
+    fi
+else
+    echo "Model already exists. Skipping download."
 fi
 
 # Create the unsloth model using ollama
 echo "Creating the unsloth model with ollama..."
-ollama create arms_unsloth_ollama_model -f Modelfile
+ollama create arms_unsloth_ollama_model -f "$MODEL_PATH"
 if [ $? -ne 0 ]; then
     echo "Failed to create the unsloth model. Exiting."
         exit 1
