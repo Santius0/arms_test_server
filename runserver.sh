@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Step 1: Install required dependencies
+# Install required dependencies
 if ! command -v python3 &> /dev/null
 then
     echo "Python3 is not installed. Installing Python3..."
@@ -66,13 +66,13 @@ fi
 
 # Create the unsloth model using ollama
 echo "Creating the unsloth model with ollama..."
-ollama create arms_unsloth_ollama_model -f "$MODEL_DIR/unsloth.Q8_0.gguf"
+ollama create arms_unsloth_ollama_model -f "./$MODEL_DIR/unsloth.Q8_0.gguf"
 if [ $? -ne 0 ]; then
     echo "Failed to create the unsloth model. Exiting."
         exit 1
 fi
 
-# Step 6: Run the Streamlit Python script
+# Run the Streamlit Python script
 echo "Running the Streamlit Python script..."
 streamlit run test_client.py --server.port 8501
 if [ $? -ne 0 ]; then
