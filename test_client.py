@@ -34,7 +34,7 @@ alpaca_prompt = """Below is an instruction that describes a task, paired with an
 
 # Function to send request to the custom backend
 def query_backend(model_name, instruction, input_text):
-    try:
+    # try:
         headers = {"Content-Type": "application/json"}
         prompt = alpaca_prompt.format(instruction, input_text, "")
         payload = {
@@ -68,12 +68,12 @@ def query_backend(model_name, instruction, input_text):
         )
         return model_answer
 
-    except requests.exceptions.RequestException as e:
-        # Log the error to the console
-        logging.error(f"Error communicating with the backend: {e}", exc_info=True)
-        # Show the error in Streamlit UI
-        st.error(f"Error communicating with the backend: {e}")
-        return None
+    # except requests.exceptions.RequestException as e:
+    #     # Log the error to the console
+    #     logging.error(f"Error communicating with the backend: {e}", exc_info=True)
+    #     # Show the error in Streamlit UI
+    #     st.error(f"Error communicating with the backend: {e}")
+    #     return None
 
 
 # Submit Button
