@@ -34,12 +34,12 @@ def query_backend(model_name, instruction, input_text):
             "prompt": prompt
         }
         response = requests.post(ENDPOINT_URL, json=payload, headers=headers)
-        # response.raise_for_status()
-        # model_answer_full = response.json().get("response", "")
+        response.raise_for_status()
+        model_answer_full = response.json().get("response", "")
         # response_start = "### Response:\n"
         # model_answer = model_answer_full.split(response_start, 1)[-1].strip() if response_start in model_answer_full else model_answer_full
         # return model_answer
-        response
+        return model_answer_full
     except requests.exceptions.RequestException as e:
         st.error(f"Error communicating with the backend: {e}")
         return None
