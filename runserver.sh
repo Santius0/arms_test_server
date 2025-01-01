@@ -15,7 +15,7 @@ fi
 
 # Download the GGUF model from Hugging Face
 HUGGING_FACE_MODEL_URL="https://huggingface.co/santius0/arms_lora_model/"
-MODEL_DIR="${REPO_DIR}/arms_lora_model"
+MODEL_DIR="${REPO_DIR}/arms_lora_model_gguf"
 
 mkdir -p "$MODEL_DIR"
 echo "Downloading GGUF model from Hugging Face..."
