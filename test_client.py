@@ -59,4 +59,4 @@ if st.button("Submit"):
 
 # Footer
 st.sidebar.markdown("### About")
-st.sidebar.info("This app uses a custom backend to provide AI-powered responses using the 'llama3.2' model.")
+st.sidebar.info("This app uses a custom backend to provide AI-powered responses using the 'arms_unsloth_ollama_model' model.")
