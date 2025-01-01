@@ -25,10 +25,10 @@ else
     echo "Pip3 is already installed."
 fi
 
-if ! python3 -m pip show streamlit &> /dev/null
+if ! python3 -m pip3 show streamlit &> /dev/null
 then
     echo "Streamlit is not installed. Installing Streamlit..."
-    python3 -m pip install streamlit
+    python3 -m pip3 install streamlit
     if [ $? -ne 0 ]; then
         echo "Failed to install Streamlit. Exiting."
         exit 1
