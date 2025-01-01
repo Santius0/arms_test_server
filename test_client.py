@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Streamlit App Configuration
-st.title("Llama Model Chat App")
+st.title("ARMS Test Model Chat App")
 st.sidebar.title("Settings")
 
 # User Input
