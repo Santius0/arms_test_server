@@ -34,7 +34,7 @@ alpaca_prompt = """Below is an instruction that describes a task, paired with an
 
 # Function to send request to the custom backend
 def query_backend(model_name, instruction, input_text):
-    # try:
+    try:
         headers = {"Content-Type": "application/json"}
         prompt = alpaca_prompt.format(instruction, input_text, "")
         payload = {
@@ -52,28 +52,29 @@ def query_backend(model_name, instruction, input_text):
         logging.debug(f"Raw response JSON: {response.text}")
 
         # Parse JSON
-        response_json = response.json()
+        # response_json = response.json()
 
         # If "response" key doesn't exist, log a warning
-        if "response" not in response_json:
-            logging.warning("The 'response' key was not found in the JSON from the backend.")
+        # if "response" not in response_json:
+        #     logging.warning("The 'response' key was not found in the JSON from the backend.")
 
-        model_answer_full = response_json.get("response", "")
+        # model_answer_full = response_json.get("response", "")
         response_start = "### Response:\n"
 
-        model_answer = (
-            model_answer_full.split(response_start, 1)[-1].strip()
-            if response_start in model_answer_full
-            else model_answer_full
-        )
-        return model_answer
+        # model_answer = (
+        #     model_answer_full.split(response_start, 1)[-1].strip()
+        #     if response_start in model_answer_full
+        #     else model_answer_full
+        # )
+        # return model_answer
+        return "dummy"
 
-    # except requests.exceptions.RequestException as e:
-    #     # Log the error to the console
-    #     logging.error(f"Error communicating with the backend: {e}", exc_info=True)
-    #     # Show the error in Streamlit UI
-    #     st.error(f"Error communicating with the backend: {e}")
-    #     return None
+    except requests.exceptions.RequestException as e:
+        # Log the error to the console
+        logging.error(f"Error communicating with the backend: {e}", exc_info=True)
+        # Show the error in Streamlit UI
+        st.error(f"Error communicating with the backend: {e}")
+        return None
 
 
 # Submit Button
