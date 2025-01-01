@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Step 1: Install required dependencies
+# Install required dependencies
 if ! command -v python3 &> /dev/null
 then
     echo "Python3 is not installed. Installing Python3..."
