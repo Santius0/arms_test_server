@@ -13,7 +13,7 @@ ENDPOINT_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "arms_unsloth_ollama_model"
 
 # Prompt Template
-alpaca_prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
+alpaca_prompt = """Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request. Never return a response of None.
 
 ### Instruction:
 {}
