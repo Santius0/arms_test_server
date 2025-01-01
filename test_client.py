@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import logging
 
 # Streamlit App Configuration
 st.title("Llama Model Chat App")
@@ -35,7 +36,8 @@ def query_backend(model_name, instruction, input_text):
         }
         response = requests.post(ENDPOINT_URL, json=payload, headers=headers)
         response.raise_for_status()
-        print(response.json())
+        logging.info(response.json())
+        logging.info(response.text)
         model_answer_full = response.json().get("response", "")
         response_start = "### Response:\n"
         model_answer = model_answer_full.split(response_start, 1)[-1].strip() if response_start in model_answer_full else model_answer_full
