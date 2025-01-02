@@ -102,8 +102,8 @@ st.title("ARMS Test Model Chat App")
 st.sidebar.title("Settings")
 model_options = [
     "arms_unsloth_ollama_model",
-    "llama3.1_8B",
-    "llama3.1_70B"
+    "llama3.1:8B",
+    "llama3.1:70B"
 ]
 selected_model = st.sidebar.selectbox(
     "Select a model:",
