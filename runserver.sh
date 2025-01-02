@@ -86,14 +86,14 @@ fi
 if [ "$DOWNLOAD_MODEL" = true ]
 then
     echo "Downloading llama3.1 8B model with Ollama..."
-    ollama pull llama3.1-8b
+    ollama pull llama3.1:8b
     if [ $? -ne 0 ]; then
         echo "Failed to download the llama3.1-8b model. Exiting."
         exit 1
     fi
 
     echo "Downloading llama3.1 70B model with Ollama..."
-    ollama pull llama3.1-70b
+    ollama pull llama3.1:70b
     if [ $? -ne 0 ]; then
         echo "Failed to download the llama3.1-70b model. Exiting."
         exit 1
