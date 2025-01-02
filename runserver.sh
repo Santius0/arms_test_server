@@ -79,7 +79,25 @@ then
         exit 1
     fi
 else
-    echo "Model already exists. Skipping download."
+    echo "ARMS model already exists. Skipping download."
+fi
+
+# If the download flag is set, also download the Llama 3.1 8B and 70B models via Ollama
+if [ "$DOWNLOAD_MODEL" = true ]
+then
+    echo "Downloading llama3.1 8B model with Ollama..."
+    ollama pull llama3.1-8b
+    if [ $? -ne 0 ]; then
+        echo "Failed to download the llama3.1-8b model. Exiting."
+        exit 1
+    fi
+
+    echo "Downloading llama3.1 70B model with Ollama..."
+    ollama pull llama3.1-70b
+    if [ $? -ne 0 ]; then
+        echo "Failed to download the llama3.1-70b model. Exiting."
+        exit 1
+    fi
 fi
 
 # Create the unsloth model using ollama
@@ -87,7 +105,7 @@ echo "Creating the unsloth model with ollama..."
 ollama create arms_unsloth_ollama_model -f Modelfile
 if [ $? -ne 0 ]; then
     echo "Failed to create the unsloth model. Exiting."
-        exit 1
+    exit 1
 fi
 
 # Run the Streamlit Python script
