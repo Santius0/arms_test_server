@@ -116,22 +116,50 @@ st.session_state.selected_model = selected_model
 # Main Chat Interface
 st.write("Welcome! Type your questions or commands below and press **Enter** to submit.")
 
-# Display the chat history
+# Display the chat history with improved styling
 for message in st.session_state.chat_history:
     if message["role"] == "user":
         # User messages on the right
         st.markdown(
-            f"<div style='text-align:right; padding:5px; border-radius:10px; background-color:#f0f0f5; margin:10px;'>"
-            f"<strong>You:</strong> {message['content']}</div>",
+            f"""
+            <div style="
+                text-align:right; 
+                padding:10px; 
+                margin:10px 20px; 
+                background-color:#DCF8C6; 
+                border-radius:10px; 
+                display:inline-block; 
+                max-width:80%;
+                font-size:1rem;
+                color:#333;
+            ">
+                <strong>You:</strong> {message['content']}
+            </div>
+            """,
             unsafe_allow_html=True
         )
+        st.write("")  # Just to create a small vertical space
     else:
         # Assistant messages on the left
         st.markdown(
-            f"<div style='text-align:left; padding:5px; border-radius:10px; background-color:#e8f4f8; margin:10px;'>"
-            f"<strong>Assistant:</strong> {message['content']}</div>",
+            f"""
+            <div style="
+                text-align:left; 
+                padding:10px; 
+                margin:10px 20px; 
+                background-color:#ECE5DD; 
+                border-radius:10px; 
+                display:inline-block; 
+                max-width:80%;
+                font-size:1rem;
+                color:#333;
+            ">
+                <strong>Assistant:</strong> {message['content']}
+            </div>
+            """,
             unsafe_allow_html=True
         )
+        st.write("")
 
 # Text input for user message - triggers send_message() on Enter
 st.text_input(
