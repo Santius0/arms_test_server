@@ -29,7 +29,9 @@ with st.form("bowtie_form"):
     detail_level = st.selectbox("Detail Level (1 = minimal, 3 = high)", [1, 2, 3])
 
     # Dropdown for selecting model provider
-    provider = st.selectbox("Model Provider", ["Ollama", "OpenAI"])
+    provider = st.selectbox("Model Provider", ["Ollama"
+        # , "OpenAI"
+                                               ])
 
     # Submit button
     submitted = st.form_submit_button("Generate Bowtie Assessment")
