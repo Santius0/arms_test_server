@@ -28,7 +28,7 @@ fi
 if ! command -v pip3 &> /dev/null
 then
     echo "Pip3 is not installed. Installing Pip3..."
-    sudo apt install -y python3-pip
+    sudo apt update && sudo apt install -y python3-pip
     if [ $? -ne 0 ]; then
         echo "Failed to install Pip3. Exiting."
         exit 1
@@ -39,6 +39,20 @@ else
     echo "Pip3 is already installed."
 fi
 
+# Check if graphviz is installed at the system level
+if ! command -v dot &> /dev/null
+then
+    echo "Graphviz is not installed. Installing Graphviz via apt..."
+    sudo apt update && sudo apt install -y graphviz
+    if [ $? -ne 0 ]; then
+        echo "Failed to install Graphviz. Exiting."
+        exit 1
+    fi
+else
+    echo "Graphviz is already installed at the system level."
+fi
+
+# Install Python packages: streamlit, openai, graphviz
 if ! python3 -m pip show streamlit &> /dev/null
 then
     echo "Streamlit is not installed. Installing Streamlit..."
@@ -49,6 +63,30 @@ then
     fi
 else
     echo "Streamlit is already installed."
+fi
+
+if ! python3 -m pip show openai &> /dev/null
+then
+    echo "OpenAI Python package is not installed. Installing OpenAI..."
+    python3 -m pip install openai
+    if [ $? -ne 0 ]; then
+        echo "Failed to install OpenAI. Exiting."
+        exit 1
+    fi
+else
+    echo "OpenAI package is already installed."
+fi
+
+if ! python3 -m pip show graphviz &> /dev/null
+then
+    echo "Graphviz Python package is not installed. Installing Graphviz..."
+    python3 -m pip install graphviz
+    if [ $? -ne 0 ]; then
+        echo "Failed to install Graphviz (Python package). Exiting."
+        exit 1
+    fi
+else
+    echo "Graphviz Python package is already installed."
 fi
 
 # Check if ollama is installed, and install if not
@@ -110,7 +148,7 @@ fi
 
 # Run the Streamlit Python script
 echo "Running the Streamlit Python script..."
-streamlit run test_client.py --server.port 8501
+streamlit run bowtie.py --server.port 8501
 if [ $? -ne 0 ]; then
     echo "Failed to run the Streamlit script. Exiting."
     exit 1
